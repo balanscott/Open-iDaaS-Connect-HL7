@@ -18,7 +18,7 @@ package io.openidaas.connect.hl7;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = "openidaas")
+@ConfigurationProperties(prefix = "idaas")
 public class ConfigProperties {
 
     private String kafkaBrokers;

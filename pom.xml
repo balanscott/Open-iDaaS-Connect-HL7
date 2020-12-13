@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <!--Internel Project Details-->
+    <groupId>io.openidaas.connect.hl7</groupId>
+    <artifactId>io.openidaas.connect.hl7</artifactId>
+    <!--><version>2.0.1-SNAPSHOT</version>-->
 
     <properties>
-        <spring.version>3.2.4.RELEASE</spring.version><!-- 3.2.4 -->
+        <spring.version>3.2.4.RELEASE</spring.version>
+        <camel.version>3.6.0</camel.version>
     </properties>
+
     <parent>
         <groupId>org.apache.camel</groupId>
         <artifactId>components</artifactId>
         <version>3.6.0</version>
     </parent>
 
-    <artifactId>camel-spring</artifactId>
-    <packaging>jar</packaging>
-
-    <name>Camel :: Spring</name>
-    <description>Camel Spring with XML DSL</description>
 
     <dependencies>
         <!-- https://camel.apache.org/releases/release-3.6.0/ -->
@@ -31,80 +32,81 @@
         <dependency>
             <groupId>org.apache.camel.springboot</groupId>
             <artifactId>camel-spring-boot-dependencies</artifactId>
-            <version>3.6.0</version>
+            <version>${camel.version}</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>
-        <!-- Spring Boot -->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>${spring.version}</version>
+            <groupId>org.apache.camel.springboot</groupId>
+            <artifactId>camel-spring-boot-bom</artifactId>
+            <version>${camel.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-expression</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <version>2.4.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <version>2.4.1</version>
-        </dependency>
-        <!-- Camel Core Libraries -->
+        <!-- Camel -->
+        <!-- Camel Libraries -->
         <dependency>
             <groupId>org.apache.camel</groupId>
-            <artifactId>camel-management</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-core</artifactId>
-            <type>test-jar</type>
-            <scope>test</scope>
+            <artifactId>camel-support</artifactId>
+            <version>${camel.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-management</artifactId>
-            <type>test-jar</type>
-            <scope>test</scope>
+            <version>${camel.version}</version>
         </dependency>
-        <!-- Apache Camel Core -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-api</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-core</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-test</artifactId>
+            <version>${camel.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Camel Spring Boot -->
+        <dependency>
+            <groupId>org.apache.camel.springboot</groupId>
+            <artifactId>camel-spring-starter</artifactId>
+            <version>${camel.version}</version>
         </dependency>
         <!-- Apache Camel Components -->
+        <!-- HL7 -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-netty</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-netty4</artifactId>
+            <version>2.25.2</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-hl7</artifactId>
+            <version>${camel.version}</version>
         </dependency>
         <!--Kafka -->
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-kafka</artifactId>
+            <version>${camel.version}</version>
         </dependency>
-        <!-- HL7 HAPI Specific Libraries-->
+        <!-- Bean -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-bean</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+        <!-- HL7 HAPI Specific Camel Support Libraries-->
         <dependency>
             <groupId>ca.uhn.hapi</groupId>
             <artifactId>hapi-base</artifactId>
@@ -159,24 +161,15 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-cloud</artifactId>
+            <version>${camel.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.derby</groupId>
             <artifactId>derby</artifactId>
             <scope>test</scope>
-        </dependency>
-        <!-- Bean -->
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-bean</artifactId>
         </dependency>
         <!-- for testing -->
         <dependency>
